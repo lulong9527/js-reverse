@@ -1,0 +1,25 @@
+// 1、学过原型链的大家应该都清楚了
+已知：
+1. Function.constructor = Function
+2. 所有的函数定义，实际上都是 new Function
+3. 也就是说，函数实际上是 Function 的实例化对象
+4. 那么函数的constructor，实际上就是 Function.prototype.constructor
+5. 所以 Function.prototype.constructor = Function
+6. 所以只要修改 Function.prototype.constructor，就可以实现 hook 自定义函数的constructor 目的
+
+所以应该这样写：
+_Function = Function
+Function.prototype.constructor = function(){
+    if (arguments[0].indexOf('debugger') != -1){
+            return _Function('')
+        }
+    return _Function(arguments[0])
+}
+
+// 2、arguments 类数组 特性，不是数组，只有一部分数组的特性，其余很多属性没有
+_eval = eval;
+eval= function(){
+    // [xxxx].indexOf('xxxx') 判断[]数组中是否包含 'xxxx' 的值相等，相等返回0，不等返回-1
+    if ([arguments[0]].indexOf('debugger'))
+    return _eval(arguments[0])
+}

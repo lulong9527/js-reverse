@@ -1,0 +1,55 @@
+
+
+这节课也比较简单
+
+主要是讲 webpack抠法和 axios这个库抠的注意事项
+
+
+最重要的一点：
+    注意：webpack是一种打包工具，可以勉强理解为是一种壳。所以，webpack本身并不会影响到任何的混淆
+
+    所以，webpack + 检测 + 混淆  是一种非常常见的组合手段
+
+    我们之前讲过了 55题的打包原理，其实webpack的打包原理跟 55题非常像。接下来我用 三个版本的webpack去讲述webpack的打包原理
+
+
+我不讲什么webpack自动化抠代码程序。我讲自动抠代码的原理
+
+至于什么自动化抠代码成品，就是在原理上进行封装。封装你们自己去包装。是exe也好，插件也好，油猴脚本也好随便
+
+axios 是一个非常出名的框架，除了jquery（10%）,剩下的要有 89%是它
+https://unpkg.com/axios/dist/axios.min.js
+
+const service = axios.create({
+    baseURL: 'https://www.python-spider.com/api/combat?page=1&count=10',
+    timeout: 5000,
+    responseType: "json",
+    withCredentials: true,
+    headers: {
+        "Content-Type": "application/json;charset=utf-8",
+    }
+})
+service.interceptors.request.use(
+    config => {
+        if(config.method === "post") {
+        } else {
+            if (store.getters.token) {
+                config.headers['X-Token'] = 'anlan:1698751:wq2s313sdre3'
+            }
+        }
+        return config;
+    },
+    error => {
+        Message({
+            showClose: true,
+            message: error,
+            type: "warning"
+        });
+        return Promise.reject(error);
+    }
+)
+
+
+这节课代码比较多，所以打了个压缩包上传到CDN了：
+
+https://download.python-spider.com/10%E8%AF%BE%E4%BB%B6.zip
