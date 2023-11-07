@@ -1,0 +1,62 @@
+混淆实际上就是把核心的js代码计算逻辑混淆掉从而增加阅读难度的一种方法
+
+目前我们能遇到的混淆基本上只有几类
+
+一、 定制类（各大安全公司产品 与 安全开发自研） 种类最多，难度最大，通性最小
+二、ob系加壳器（
+祖宗：http://obfuscator.io/
+请注意，这些大部分加壳器都是依靠ob开源框架并且增加了自己的一些理解的加壳器。
+）
+
+ob 混淆特征： 大数组 + 数组移位 + 解密函数
+
+经验: 先大胆尝试风险测试，尽心耗时精力和成功率 平衡 --- 先干再说
+
+结论：
+1、伪动态 ob 混淆
+2、它可能不存在 set-cookie 交互
+3、混淆代码 可以一定程度被还原
+
+
+三、 Function半淘汰加壳器系列（  // 性能差被淘汰了
+       AAencode
+       jjencode
+       jsfuck
+       ...
+    ）
+    3、jsfuck 解题思路 hook Funchtion 在hook eval
+    // hook Function
+    _Function = Function
+    Function.prototype.constructor = function(){
+        console.log(arguments)
+        return _Function(arguments[0])
+    }
+    // hook eval
+    _eval = eval;
+    eval= function(){
+        console.log(arguments)
+        return _eval(arguments[0])
+    }
+
+四、通过产品分类之后，我们还可以通过属性来分（之前课程已经讲过了，我们再来回顾一下）
+    变量名与变量不可视
+    控制流平坦化
+    花指令
+    死代码
+    表达式干扰
+    代码压缩成一行 + 格式化的检测   练习平台第三题
+
+处理动态代码，首先要明确几个概念
+1、页面的cookie 反扒的表现形式  先混淆 然后就正常，如果cookie 没过期，就一直正常
+2、何为动态 伪动态/真动态，无论怎样，建议先静态处理，然后再说
+3、跟断了怎么办  静态处理 不怕跟断，伪动态/真动态 先保存js 在终端进行调试，断了在使用保存的js 继续跟
+
+原生的 ob 内存爆破， 解决方法
+    1、不进行格式化
+    2、hooke 正则， 例如第三题
+    RegExp.prototype.test = function () {
+        return true
+    }
+    3、改写正则监测点
+
+
