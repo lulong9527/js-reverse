@@ -6,6 +6,9 @@ debugger;
 
     function r(i) {
         if (e[i]) return e[i].exports;
+        // 扣的时候 需要加个条件断点 进行插桩
+        // window.result = ''
+        // window.result = window.result + '"' + i + '":' + t[i]+'' + ','
         var n = e[i] = {i: i, l: !1, exports: {}};
         return t[i].call(n.exports, n, n.exports, r), n.l = !0, n.exports
     }
