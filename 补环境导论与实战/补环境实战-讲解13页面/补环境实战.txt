@@ -1,13 +1,15 @@
 谷歌浏览器调试代码
 node --inspect-brk xxx.js
 
+// 判断在哪里进行 设置cookie , hook cookie
+cookieTemp = ''
 Object.defineProperty(document, "cookie", {
     set: function(val) {
         if (val.indexOf("yrx-13") != -1) {
-
+            debugger;
         }
+        cookieTemp = val;
         console.log("Hook捕获Cookie设置->", val);
-        console.log("cookieTemp->", cookieTemp);
         // return val;
     },get: function() {
             return cookieTemp;

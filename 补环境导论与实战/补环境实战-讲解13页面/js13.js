@@ -1,28 +1,91 @@
-window = global
+// yrx-13 -> A6d5nyu2jxPLaG8rrKM41Nz0MNB0LHsO1QD_gnkUwzZdaMmOgfwLXuXQj9OK
+window = global;
+localStorage = {
+    getItem: function () {
+        return null
+    },
+    setItem(key, value) {
+    }
+}
+setInterval = function (a, b) {
+    // setTimeout(a, b)
+}
 addEventListener = function () {
+}
+location = {
+    port: "",
+    ancestorOrigins: {},
+    search: "?nm=13",
+    hash: "",
+    pathname: "/challenge/new/jss",
+    origin: "https://www.python-spider.com",
+    hostname: 'www.python-spider.com',
+    protocol: 'https:',
+    href: 'https://www.python-spider.com/challenge/new/jss?nm=13',
+    host: 'www.python-spider.com',
 
 }
-documentElement = {}
-location = {
-    hostname: 'www.python-spider.com',
-    protocol: 'https',
+plugins = {
+    0: {name: 'PDF Viewer'},
+    1: {name: 'Chrome PDF Viewer'},
+    2: {name: 'Chromium PDF Viewer'},
+    3: {name: 'Microsoft Edge PDF Viewer'},
+    4: {name: 'WebKit built-in PDF'},
+    length: 5
 }
-navigator = {}
+navigator = {
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+    javaEnabled: function () {
+        return false
+    },
+    plugins: plugins,
+    webdriver: false,
+    doNotTrack: null,
+    language: 'zh-CN',
+    languages: ['zh-CN'],
+    platform: 'Win32',
+    vendor: 'Google Inc.'
+}
 head_dom = {}
+omwheel = {}
 div_dom = {
     onwheel: null
 }
-createElement = function (a) {
+getContext = function (va) {
+    return {}
+}
+
+canvas_dom = {
+    getContext: getContext
+}
+_createElement = function (a) {
     if (a === 'div') {
         return div_dom
     }
+    if (a === 'canvas') {
+        return canvas_dom
+    }
+}
+documentElement_dom = {
+    addBehavior: undefined  // 浏览器中没有
+}
+getElementsByTagName = function () {
+    return []
+}
+Element = function () {
+
+}
+Element.prototype.insertBefore = function () {
+
 }
 document = {
     cookie: '',
     head: head_dom,
-    createElement: createElement,
+    createElement: _createElement,
     addEventListener: addEventListener,
-    documentElement: documentElement
+    documentElement: documentElement_dom,
+    getElementsByTagName: getElementsByTagName
+
 }
 
 var TOKEN_SERVER_TIME = 1689063000;
@@ -240,6 +303,7 @@ Date.now = function () {
                 try {
                     return !!(yrx_$u in yrx_$r[43] && yrx_$t[50][yrx_$u])
                 } catch (yrx_$n) {
+                    console.log('yrx_$p' + yrx_$n);
                     return void yrx_$e[27]
                 }
             }
@@ -248,6 +312,7 @@ Date.now = function () {
                 try {
                     return yrx_$s.getItem(yrx_$n)
                 } catch (yrx_$n) {
+                    console.log(yrx_$n);
                     return yrx_$t[51]
                 }
             }
@@ -298,6 +363,7 @@ Date.now = function () {
                             yrx_$l = yrx_$v.w[yrx_$n[46]][yrx_$e[27]][yrx_$t[57]],
                             yrx_$s = yrx_$l.createElement(yrx_$e[48])
                     } catch (yrx_$n) {
+                        console.log('yrx_$w:' + yrx_$n);
                         yrx_$s = yrx_$f.createElement(yrx_$u),
                             yrx_$l = yrx_$f[yrx_$e[49]] || yrx_$f.getElementsByTagName(yrx_$e[30])[yrx_$t[35]] || yrx_$f[yrx_$e[50]]
                     }
@@ -313,6 +379,7 @@ Date.now = function () {
                 try {
                     yrx_$s.removeItem(yrx_$n)
                 } catch (yrx_$n) {
+                    console.log('yrx_$_:' + yrx_$n);
                 }
             }
 
@@ -590,6 +657,7 @@ Date.now = function () {
                     return time = yrx_$d[75].now(),
                     time / parseInt(yrx_$w[78], yrx_$I[79]) >>> yrx_$c[35]
                 } catch (yrx_$t) {
+                    console.log('yrx_$on:' + yrx_$t);
                     return time = yrx_$n.getTime(),
                     time / parseInt(yrx_$s[79], yrx_$d[80]) >>> yrx_$v[29]
                 }
@@ -667,6 +735,7 @@ Date.now = function () {
                                 break
                         }
                     } catch (yrx_$n) {
+                        console.log('yrx_$fn:' + yrx_$n);
                     }
             }
 
@@ -940,6 +1009,7 @@ Date.now = function () {
                 try {
                     yrx_$r = yrx_$g[83].createElement(yrx_$n + yrx_$on + yrx_$t).getContext(yrx_$u[124])
                 } catch (yrx_$n) {
+                    console.log(yrx_$n);
                 }
                 return !!yrx_$r
             }
@@ -999,6 +1069,7 @@ Date.now = function () {
                 try {
                     yrx_$r = new yrx_$l[39][yrx_$in + yrx_$R + yrx_$t + yrx_$B](yrx_$n)
                 } catch (yrx_$n) {
+                    console.log('yrx_$_n:' + yrx_$n);
                     return !yrx_$l[31]
                 }
                 return !!yrx_$r
@@ -1063,6 +1134,7 @@ Date.now = function () {
                 try {
                     return yrx_$d[118] in yrx_$u[50]
                 } catch (yrx_$n) {
+                    console.log('yrx_$Mn:' + yrx_$n);
                     return yrx_$f[126]
                 }
             }
@@ -1134,6 +1206,7 @@ Date.now = function () {
                     yrx_$T[yrx_$h] = yrx_$Un.getKeyDown(),
                     yrx_$T[yrx_$g] = yrx_$Un.getClickPos().x,
                     yrx_$T[yrx_$m] = yrx_$Un.getClickPos().y;
+                // console.log(yrx_$T) (可以直接去网站流程粘下来)  arg 1
                 var yrx_$t = yrx_$T.toBuffer();
                 return yrx_$Kn.encode(yrx_$t)
             }
@@ -1165,6 +1238,7 @@ Date.now = function () {
                                 yrx_$$(arguments[yrx_$n[30]]) || (yrx_$jn[yrx_$o + yrx_$gn] || (yrx_$c = yrx_$Gn.update()),
                                     this.setRequestHeader(yrx_$kn, yrx_$c))
                             } catch (yrx_$t) {
+                                console.log('yrx_$R:' + yrx_$t);
                                 return yrx_$n[143]
                             }
                         }
@@ -1188,6 +1262,7 @@ Date.now = function () {
                                             yrx_$$n.analysisRst(yrx_$$n.parse(yrx_$v[yrx_$Sn.toLowerCase()]))
                                         }
                                     } catch (yrx_$n) {
+                                        console.log('yrx_$m:' + yrx_$n);
                                         return yrx_$l[143]
                                     }
                                     return yrx_$e.apply(this, arguments)
@@ -1293,6 +1368,7 @@ Date.now = function () {
                         try {
                             yrx_$o(yrx_$t)
                         } catch (yrx_$n) {
+                            console.log('yrx_$t:' + yrx_$n);
                             return yrx_$n
                         }
                         return yrx_$j(this, yrx_$n, arguments)
@@ -1395,6 +1471,7 @@ Date.now = function () {
                                     try {
                                         yrx_$H()
                                     } catch (yrx_$n) {
+                                        console.log('yrx_$r:' + yrx_$n);
                                         return yrx_$Cn + yrx_$t
                                     }
                                 return new yrx_$n(yrx_$r)
@@ -1453,6 +1530,7 @@ Date.now = function () {
                 try {
                     yrx_$o()
                 } catch (yrx_$n) {
+                    console.log(yrx_$n);
                     return yrx_$n
                 }
             }
@@ -1462,7 +1540,4 @@ Date.now = function () {
         }(yrx_$Yn || (yrx_$Yn = {}))
     }()
 }(["xi", "n-", "v", "ai", ".", "get", "kie", "; d", ")Aw", "3", "ced", "strT", "rigi", "]V8a", "w", "l", Array, "Map", Function, 58, "ttpR", "Feb 2050", "fZ,", ";", "", 9527, 256, String, "head", 0, 1, "al", "Coo", 92, 81, !1, window, "[X9^QR", "TR8", "┌┬", "localStorage", "d", "___", "documentElement", "addBehavior", '<script>document.w=window<\/script><iframe src="/favicon.icon"></iframe>', "frames", "base_fileds", "ZK", "f", "ode", 2, 16, 8, "14", "3f", 30, "ZV%PP[X2P", "ned", "r", "e", ")^]a", 86, "le", "╙┾", "^{", "th", / /g, "10", RegExp, '^".*"$', "╛ॲ", "ready", "1200000", "script", "src", "sj.", 56, "ad", "readyState", 14, "╅ॸज़৵঩ऎচ৐ঀ৘", "n*.z", document, Date, "i", "[@", 85, "@", "object", "status_code", "location", "TX5TL^9[", "length", 5, 32, "╄┰╂┪╋┸═", "random", "L^;PvX!", "addEventListener", !0, "onwheel", "O_3PT", "*6?v", "rra", " gs?", "╃┫", "x arm", "╁ॡॻ৿঴", "t", "Po", "+FrJ", 22, 12, 34, "KV", "maxHeight", "╶┕╡┈╾┛╃┌╮┄╡│╶", 7, "Object", "opr", "QQBrowser", "%TuD4", "╔ॵै৾ঽस", "iso-8859-1", "defaultCharset", 23, "ng", "zh-cn", "language", "Native Client", "^Android", "plugins", "mroftalPteg", 10, 11, "13", "16", "74", "[^\\r\\n]", "*)\\r?$", "╛┽", "Fri, 01 ", "error", "[object Request]", "^FyT", "allow", "sredaeh", "headers", "it", 95, 60, encodeURIComponent, 46, "PE3S", "#", "host", "0)_", "g", "Wi", "prototype", "0 GMT", "/", "`z}lc", 15, "^", "_raw", "CHAMELEON_LOADED"], ["du", "oma", "ie", RegExp, "proto", "base", "enc", 79, "ode", "und", 4, 28, "Domain", "mUrl", 40, "hee", "╳॒ॷড়িनঝ", 57, "ri", "t", "Acti", "th", "gin", "\\.", "B", Array, !0, "yrx-13", "X-Antispider-Message", "11", "s.thsi.cn", 1, document, "", 2333, 0, String, "003", "Thu, 01 Jan 1970 00:00:00 GMT", "location", "protocol", "enon=etisemas ;", "; secure=true", "fH-&", "co", "ok", 16, "=", "delCookie", "^", window, !1, 94, "╬़घল৴ॸৈখড়ঔ২চঔ঒৪੍ਦ০৶६ञঢাপঘठऌऑੳঁ঻य঱", "g", 'KR"', "htmlfile", "ducument", "led", "length", "7", "╛┾═┷╃┫", 8, "eds", "ff", "001", "║ॻ", 2, "|AX", ":]", "es", "oDec", 13, "//s.thsi.cn/js/chameleon/time.1", "onerror", "\\N", "uyt", "╞┰╄┡╓┲║┥╌┺╟", "onload", "1000", "\\.com\\.cn$|\\.com\\.hk$", 3, "10", "{2,}([^\\/\\", "fk%\bl]LC&F\r\nd-J~nfkyikuidj}", ":", "redi", "href", "redirect_url", "on", "parse", "getServerTime", 59, "╖┸╙┵╌┿╖┥╷┄╰", "isIPAddr", "eventBind", "onmo", "wesu", "IA`\\", "╚┵╀", "sew", "ell", "isTrusted", "clientX", "getMouseMove", '_R"xWB%P{[?VS', "a", "32", "4gCD", "^iP", "╹┌╡", "callPhantom", "ActiveXObject", "vendor", "i", "Maxthon", "chrome", "2}e", "}", "╢┠╒┽╊┹╜┮", "P\\erk", "msDoNotTrack", "20", "as", "webgl2", "name", "bjec", "╶ॾॎ৸দसশ৾খৗধ৒ৌ", "mroftalp", "$8", "111100000", Date, "╩┾╗┹┏┻", "xr]v", "f^]WY3", 95, 10, "hos", "ow", "f\bl", "open", "Y[:", "getAllResponseHeaders", "error", "fetch", "type", "toString", "headers", "ement", "se", "╩━╵━╱│┽╡╛", "╃┢═┷╒┦", "#", "target", "╛ॸ॔৶তव", "HE9AWT9Y", "apply", "or", "JbD}p", "124f80", "CHAMELEON_LOADED"], ["he", "lo", "om", ".*", "State", "╅┠╃┷", "la;!", "erTi", 65, Array, 19, "t", "veXO", "bjec", 73, "╙५", String, "Shock", "^W", "in", "ow", "$", "su", Function, RegExp, "thsi.cn", "", 2333, document, "w", "In", !0, "3ca", "s.c", "hostname", ":sptth", "yuanrenxue.com", 1, "; path=", "=", 0, "length", "document", window, "37", "_fil", "prototype", "toBuffer", "l%}", "╓ॸख़৾঴सবৄ঒৛ধৃ", "╛ॸ॔৶তव", 8, 3, "01", "ff", 16, "<A`", 5, "┄ॻ", 6, 2, "edocnE46esab", "╒ॹ", "A=!", "╒┴╝", "tps?:))?\\/", "f", "bool", "serv", "ng", "}$", "d&", ":", "9~", "protocol", Date, "Sf", "onreadystatechange", "complete", null, 10, ".", "^\\s*(?:(ht", "h", "edoc_sutats", "3e8", "3e9", "1111101010", "iFy", "^(\\d+\\.)+\\d+$", "(c7'^", 72, "heel", 31, "div", "hM", "mousemove", "╜┹╀┤╋┼╒", 'QDGMD"P\\', "getKeyDown", "getClickPos", "ActiveX", "3'ha", "^Linu", "ad", "teg", "╺ॲीূ঵ऩচ৘চ৚঱৴ৎ৘৘੥", "Uin", "ActiveXObject", "31", 'yT"\\', "WeakMap", "Google Inc.", "Apple Computer, Inc.", "python", "sgAppName", "i", "Q", "y8.", "mT%", "2345Explorer", "chrome", "MSGesture", "e", "1", "doNotTrack", !1, "8t>", "languages", "TR8RL_", "PDF|Acrobat", "ShockwaveFlash.ShockwaveFlash", "^MacIntel", "^Linux [ix]\\d+", "getBrowserIndex", "getBrowserFeature", "Init", "MG2TLR", "[ \\t]*(", 62, "╄┶╕┐╼", "bm", "^(.*?):", "304", "gm", "otorp", "url", "headers", 42, "6pi", "click", "parentNode", "tagName", "A", "\\?", "&", "?", "src", "analysisRst", "insertBefore", 76, "XMLH", "_str"], [".b", "═┤╌", "type", "gth", "2", Date, "┇", "rea", "?\\#\\\\]+)", "oByt", '_R"gWX"', 95, "getO", "imal", "╒ॎख़ৣিऱং", "║┰", "Weak", "roid", "i^", "plug", "ins", "1", "ts", "╒९ै", "╟┺╂┫╅╨┞", "CHAMELEON_CALLBACK", 2, 0, RegExp, "╄ॲऔ৥সमইটগ৓", "head", 1, "", "V587", "it", "╔ॵय़৲঻ाঁ৞ট৔ধ", "╖ॱॖ৾ধ", "in=", "location", window, "=", "; expires=", "setCookie", 9, "; ", "#default#userData", "___$&", "qY?A", "div", "body", "documentElement", "0mU", "═┵╁", "base_fileds", 44, "len", "length", "18", 10, 12, 6, 16, "┆बऋঠৡ६য়ঀ", "83", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_", "22", 94, "error", "o", "nFro", "╚┿╱┞", "11111111111111111111111111111111", "", ":", 7, "onload", "5${T", 'LV"', "1750", 8, "_url", "ex=", "getHostFromUrl", "═ॸॎড়ি", "useWh", document, "touchmove", "click", "clientY", "y", "el", "ng", "OXev", "wave", "Plu", "~)l!", 26, "veXO", "bjec", "postMessage", "t8A", "╁ॸ॔৵িय", "chrome", "BIDUBrowser", "LBBROWSER", "mMR", "╔ॵै৾ঽस", "Q", "2X", "TheWorld", "plugins", "ca", "ontouchstart", "navigator", "OR4QJ^ PJ", "KN%A]ZTVP#T_R", !1, "i", "localStorage", "^ARM", "^BlackBerry", 3, "┆┶┆", "1100", "14", "17", "10001", "10", "100", "me", "eque", " l", "renetsiLtnevEdda", "^@tuh", "jsonp_ignore", Object, "headers", "base", "^_", "target", "ferh", "PV%]", "unload", "tagName", "SCRIPT", "dlihCdneppa", "tna", "?", "\\.", "$", "11", "nd", "tcejbOXevitcA", "Init"]);
-
 console.log(document.cookie)
-
-

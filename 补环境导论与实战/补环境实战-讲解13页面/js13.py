@@ -7,7 +7,7 @@ headers = {
     'accept-language': 'zh-CN,zh;q=0.9',
     'cache-control': 'no-cache',
     'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    'cookie': 'sessionid=6n0cx4yyell8yh2itub448v6xmihmowa',
+    'cookie': 'yrx-13=AyH_CeGU4V0hqikdNkEGamb2MOY-zpXAv0I51IP2HSiH6k8Yyx6lkE-SSaUQ;; Hm_lvt_337e99a01a907a08d00bed4a1a52e35d=1699583477,1699605433,1699845034; sessionid=jtu7jxrunsq4cq2vywx81y5mmgofa4vd; Hm_lpvt_337e99a01a907a08d00bed4a1a52e35d=1699845055',
     'origin': 'https://www.python-spider.com',
     'pragma': 'no-cache',
     'referer': 'https://www.python-spider.com/challenge/new/jss?nm=13',
