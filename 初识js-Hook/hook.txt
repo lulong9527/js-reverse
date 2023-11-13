@@ -1,0 +1,36 @@
+// arguments 类数组 特性，不是数组，只有一部分数组的特性，其余很多属性没有
+_eval = eval;
+eval= function(){
+    // [xxxx].indexOf('xxxx') 判断[]数组中是否包含 'xxxx' 的值相等，相等返回0，不等返回-1
+    if ([arguments[0]].indexOf('debugger'))
+    return _eval(arguments[0])
+}
+
+
+// 此处要接触 原型链 知识， __proto__ 相当于父(上级)，prototype 相当于兄(同级)， a = new Date() 相当于 a继承Date(a是Date儿子),
+// 当 new Date() 函数变更，无需在new 一个对象, a 跟着变更，相当于浅拷贝
+_appendChild = Node.prototype.appendChild
+Node.prototype.appendChild = function(){
+    if (arguments[0].innerHTML && arguments[0].innerHTML.indexOf('debugger') != -1){
+         arguments[0].innerHTML = ''
+    }
+    return _appendChild.apply(this, arguments)
+}
+
+// 学过原型链的大家应该都清楚了
+已知：
+1. Function.constructor = Function
+2. 所有的函数定义，实际上都是 new Function
+3. 也就是说，函数实际上是 Function 的实例化对象
+4. 那么函数的constructor，实际上就是 Function.prototype.constructor
+5. 所以 Function.prototype.constructor = Function
+6. 所以只要修改 Function.prototype.constructor，就可以实现 hook 自定义函数的constructor 目的
+
+所以应该这样写：
+_Function = Function
+Function.prototype.constructor = function(){
+    if (arguments[0].indexOf('debugger') != -1){
+            return _Function('')
+        }
+    return _Function(arguments[0])
+}

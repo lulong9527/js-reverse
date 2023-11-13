@@ -1,0 +1,108 @@
+谷歌浏览器调试代码
+node --inspect-brk xxx.js
+
+Object.defineProperty(document, "cookie", {
+    set: function(val) {
+        if (val.indexOf("yrx-13") != -1) {
+
+        }
+        console.log("Hook捕获Cookie设置->", val);
+        console.log("cookieTemp->", cookieTemp);
+        // return val;
+    },get: function() {
+            return cookieTemp;
+        }})
+
+注意:
+// 蜜罐  代码的走向没有按照预期的方法走
+// 处理蜜罐的本方法   浏览器和本地的node.js连调   一步一步走，一个函数一个函数， 一段一段代码 对比
+// 猿人学第二届比赛题， 蜜罐从第一题到第10题 全是蜜罐
+// 巧方法， 蜜罐一定会出现条件分支, (从分支里面处理)
+// 1、判断 if else
+// 2、控制流平坦化  case switch
+// 3、三目表达式
+// 4、try catch    （先排查，操作在所有的cath 后面打上日志）
+// 5、&& ||
+
+
+
+    搞定本页cookie ----- yrx-13
+
+
+
+
+    setInterval = function (a, b){
+}
+window = global;
+addEventListener = function (a, b, c){
+}
+Element = function (){}
+Element.prototype = {
+    insertBefore: function (){},
+    appendChild: function (){},
+}
+localStorage = {
+    getItem: function (){},
+    setItem: function (){},
+}
+tag = {
+    'onwheel': null
+}
+
+canvas = {
+    getContext: function (){ return {}},
+}
+document = {
+    // cookie: 'yrx-13=A8ylTinQxLIswbT6E5p2O-kInSH7BXCvcqmEcyaN2HcasWIfThVAP8K5VAJ1',
+    getElementsByTagName: function() {
+        // console.log(arguments)
+        if (arguments === 'base'){
+            return []
+        }
+        return [tag]
+    },
+    createElement: function(a) {
+        if (a === 'canvas'){
+            return canvas
+        }
+        return tag
+    },
+    attachEvent: function(a, b, c) {},
+    documentElement: {
+        addBehavior: undefined,
+    },
+    addEventListener: addEventListener,
+}
+MimeType = function (){
+    return {
+        0: {
+            description: "Portable Document Format",
+            enabledPlugin: "",
+        },
+        name: "PDF Viewer"
+    }
+}
+
+
+navigator = {
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+    javaEnabled: function (){return false},
+    plugins: {
+        0: MimeType(),
+        1: MimeType(),
+        2: MimeType(),
+        3: MimeType(),
+        4: MimeType(),
+        length: 5,
+    },
+    vendor: 'Google Inc.',
+    webdriver: false,
+    doNotTrack: null,
+    language: "zh-CN",
+    languages: ['zh-CN', 'zh'],
+    platform: 'Win32',
+}
+location = {
+    hostname: 'www.python-spider.com',
+    href: 'https://www.python-spider.com/challenge/new/js13',
+}

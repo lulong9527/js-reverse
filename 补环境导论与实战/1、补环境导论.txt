@@ -1,0 +1,221 @@
+纯协议流
+1、扣代码 ---> 也有对环境的处理  ---> 扣代码+补环境
+2、补环境 ---> 狭义的补环境
+
+    何为补环境？
+
+    狭义： 一段js代码拿过来，原封不动的处理。然后让它兼容我们的执行环境
+
+    eg:
+
+    function canvas_ck(){
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
+        targetWidth = 500
+        targetHeight = 300
+        context.clearRect(0, 0, targetWidth, targetHeight);
+        context.fillRect(10, 10, 150, 75)
+        return canvas.toDataURL()
+    }
+
+    广义： 只要有相关浏览器API的补充，哪怕只有一句话，都可以认为是在一定程度上的补环境
+
+    if(canvas_ck()){
+        document.cookie = 'yrx=class12bhj'
+    }
+
+    ------>
+
+    document = {cookie: ''}
+
+    if(true){
+        document.cookie = 'yrx=class12bhj'
+    }
+
+
+    通过这个例子大家就发现了，普通的对象补起来比较轻松，只需要单纯处理一下即可。
+
+    那么我们就利用补环境的思路处理一下练习平台的 11题
+
+
+
+    js 代码：
+
+    document = {
+        cookie: '',
+        addEventListener: function (a, b, c) {
+            b()
+        },
+        createElement: function (){return {firstChild: {href: 'https://www.python-spider.com/'}}}
+    }
+    setTimeout = function () {};
+    window = {
+        addEventListener: '111',
+    };
+
+    __jscodes
+    function decode(){
+        return document.cookie
+    }
+
+
+    python代码
+
+    import requests
+    import re
+    import execjs
+
+    session = requests.session()
+    cookies = {
+        'sessionid': '4ki93yugkyyzhznovqx6u5erslc8pwr8'
+    }
+    response = session.get('https://www.python-spider.com/challenge/11', cookies=cookies)
+    jscode = re.match('', response.text).group(1)
+    with open('1.js', 'r', encoding='utf-8') as f:
+        result = execjs.compile(f.read().replace('__jscodes', jscode)).call('decode')
+
+    print(result)
+
+    cookies[result.split('=')[0]] = result.split('=')[1].split(';')[0]
+    print(cookies)
+    response = session.get('https://www.python-spider.com/challenge/11', cookies=cookies)
+    print(response.text)
+
+    通过这个例子大家可以看出，简单的补环境实现起来特别容易。
+
+
+    接下来我们简单提一嘴原型链 【很重要】
+
+    我们都知道，构造函数的实例化对象隐式原型__proto__ 指向了构造函数的显式原型prototype
+
+    即： function A(){}
+    a = new A()
+    a.__proto__ === A.prototype
+
+    当调用一个对象/函数的属性的时候，会按照原型链（隐式原型）的方式进行逐级的向下搜寻
+
+    举例：比如我们来一个 chrome常见的参数
+
+    document.DOCUMENT_NODE
+
+    那么实际上它就是逐级寻找的过程
+
+    我们在控制台打印一个对象的时候，大家应该发现了，对象里两种不同的颜色
+
+    深色，浅色
+
+    其中： 深色 指 可枚举属性（即 可以用for in方式查找出来）
+          浅色 指 不可枚举属性
+
+        加粗标识该属性在当前的对象中
+        不加粗标识属性在当前对象的原型链中
+
+    但是这个规律在document上有些是不适用的。
+
+    我们先看一下 window 和 document 的原型链
+
+    window.__proto__.__proto__.__proto__.__proto__
+    document.__proto__.__proto__.__proto__.__proto__.__proto__
+
+    所以其实，最终实现的 window 与 document 原则上是通过一点一点的"构造函数" new 上去的（或拼上去的）
+
+    而 “关键词” 在 js语法中是不可被重写的
+
+    也就是说，如果有这样一个网站做了这样一个检测：
+
+    document instanceof EventTarget  ，从补环境的角度上来说，我们就必须让 document 与 EventTarget 产生继承关系才行
+
+
+    Q:  类似于 document instanceof EventTarget 这些相关检测点是如何被发现的。就是经验。大量的，海量的经验。
+
+    我会告诉大家我目前遇到的所有的 不同类型的检测点处理思路
+
+    那么目前位置：简单的对象与函数检测。我就讲完了。按照例题那么补就可以了
+
+    那么接下来，我们来学习下一个检测点
+
+    a = document.createElement('a')
+    a.href = 'https://www.yuanrenxue.com'
+    console.log(a.host)
+
+    首先我们要先找到 href 和 host在哪里
+    a.__proto__
+
+    所以 稍微标准一点（标准1%）的话，我们就需要先处理一下 HTMLAnchorElement
+    【初学补环境不要考虑太多。跟我的节奏，我考虑一个你就考虑一个，不要杠，杠就是你对】
+
+    HTMLAnchorElement = function(){};
+    HTMLAnchorElement.prototype.host = '';
+    HTMLAnchorElement.prototype.href = '';
+    HTMLAnchorElement.prototype._HTMLAnchorElement_href = '';
+
+    Object.defineProperty(HTMLAnchorElement.prototype, 'href', {
+        set: function(){
+            this.host = arguments[0].split('/').at(-1);
+            this._HTMLAnchorElement_href = arguments[0];
+            // return arguments[0]   // 这里不用return  等号表达式在解析的时候会自动向前赋值的，这里不需要return
+        },
+        get: function(){
+            return this._HTMLAnchorElement_href;
+        },
+    })
+
+    // 这个模块写完了之后，我们就需要做一些其他的处理了
+
+    document = {
+        createElement: function(val){
+            if(val === 'a'){
+                return new HTMLAnchorElement("anlan_cE")
+            }
+        }
+    }
+
+    这样就算搞定这么一个 小检测点了。 接下来我们要稍微抹除一下痕迹
+
+    document.createElement.toString()  这个常规的检测，那么 这个检测点的根源在哪里？
+
+    大家继续跟着我的思路走
+
+    document.createElement.__proto__
+
+    document.createElement.__proto__.__proto__  在这儿，对么？
+
+    空函数本质是什么？ Function.prototype
+
+    _toString = Function.prototype.toString
+    Function.prototype.toString = function(val){
+        debugger;
+        if (this.name === 'createElement'){
+            return 'function createElement() { [native code] }'
+        }
+        else if(this.name === ''){
+            return 'function () { [native code] }'
+        }
+        else if(this.name === 'HTMLAnchorElement'){
+            return 'function HTMLAnchorElement() { [native code] }'
+        }
+        else{
+            _toString.apply(this, arguments)
+        }
+    }
+
+    那么写了这么多我们是不是就高枕无忧了呢？ 不是
+
+    为什么？ 因为：
+
+    HTMLAnchorElement()  直接执行会报错。所以
+
+    HTMLAnchorElement = function(){
+    debugger;
+        if(this instanceof HTMLAnchorElement){
+            throw TypeError(`Failed to construct 'HTMLAnchorElement': Please use the 'new' operator, this DOM object constructor cannot be called as a function)
+        }
+        else if(val){
+            if(val === "anlan_cE"){}
+        }
+        else{
+            throw TypeError('Illegal constructor')
+        }
+    };
+
+    今天的课程暂时就先这样。就讲这么多吧
