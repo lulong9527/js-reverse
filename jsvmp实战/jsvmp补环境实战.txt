@@ -1,0 +1,195 @@
+
+
+    https://www.python-spider.com/challenge/new/jss?nm=15
+
+
+    这节课弄两个东西
+    一个是 yrx15=274e27e504107ffec63539e136dd950d
+    第二是 Yrx-15-Jsvmp:470516302.05abd2d479032a93b8555b09260fd99b5216e6b3b12232423f47334768d5ebaa.1690458469099
+
+
+
+
+
+    目标：先hook住 浏览器的时间，和随机数
+    让本地的node js 执行结果与浏览器一致。就算成功
+
+    https://www.python-spider.com/challenge/api/user?yrx15=10bdfc24fd501e39b6bbda36341b61ac
+    Yrx-15-Jsvmp: 470516302.a50b5d950418ebcd276fba710363926c45bcb114157d6e7efa8619e4c5ddd9d7.1690435186814
+
+
+    Date.prototype.getTime = function(){
+        return 1690435186814
+    };
+    Math.random = function (){
+        return 0.22283564695768754
+    }
+
+    MAC OS
+    charles mapping
+
+
+    jsvmp 补环境
+
+    1. 找准插桩位置
+        a.  重复执行（多次，很多次，几千，几万，十几万）
+        b.  信息充足（以，有明文，有关键操作，有返回值为准）
+        c.  插桩位置，出现了密文，要逆向的内容以及关键计算步骤
+
+    2. 根据插桩信息，【推测】代码执行流程，补充缺失环境
+
+    3. 浏览器本地联调，文本相似度对比
+
+
+总结：
+    补环境：
+        jsvmp 核心： 插桩，对比
+
+
+    jsvmp算法流：
+        基于插桩：
+            指令中跟计算相关的操作，然后再去补充插桩，进行组合。就是算法还原
+
+            100 --- 10000
+
+            乘以指令/平方指令
+
+            平方指令 --- 100
+            乘以指令 --- 100， 100
+
+            下一个桩会出现 10000
+
+            加和指令 ---- 10000， 50
+
+            下一个桩会出现 10050
+
+
+
+
+环境代码：
+window = global;
+
+Error = function (){};
+
+
+Error.prototype.stack = 'Error\n    at eval (eval at onRequest (https://www.python-spider.com/challenge/new/jss?nm=15:2:148216), :1:2)\n    at onRequest (https://www.python-spider.com/challenge/new/jss?nm=15:52:148216)\n    at yrx_i (https://www.python-spider.com/challenge/new/jss?nm=15:52:85760)'
+
+
+navigator = {
+    webdriver: false,
+    languages: ['zh-CN'],
+
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+    plugins: [
+        {
+        name: 'PDF Viewer',
+        description:"Portable Document Format",
+        length: 2,
+        "0": {
+            type: 'application/pdf',
+            suffixes: 'pdf',
+        },
+        "1": {
+            type: 'text/pdf',
+            suffixes: 'pdf',
+        }
+    }, {
+        name: 'Chrome PDF Viewer',
+        description:"Portable Document Format",
+        length: 2,
+        "0": {
+            type: 'application/pdf',
+            suffixes: 'pdf',
+        },
+        "1": {
+            type: 'text/pdf',
+            suffixes: 'pdf',
+        },
+    }, {
+        name: 'Chromium PDF Viewer',
+        description:"Portable Document Format",
+        length: 2,
+        "0": {
+            type: 'application/pdf',
+            suffixes: 'pdf',
+        },
+        "1": {
+            type: 'text/pdf',
+            suffixes: 'pdf',
+        },
+    }, {
+        name: 'Microsoft Edge PDF Viewer',
+        description:"Portable Document Format",
+        length: 2,
+        "0": {
+            type: 'application/pdf',
+            suffixes: 'pdf',
+        },
+        "1": {
+            type: 'text/pdf',
+            suffixes: 'pdf',
+        },
+
+    }, {
+        name: 'WebKit built-in PDF',
+        description:"Portable Document Format",
+        length: 2,
+        "0": {
+            type: 'application/pdf',
+            suffixes: 'pdf',
+        },
+        "1": {
+            type: 'text/pdf',
+            suffixes: 'pdf',
+        }
+    }],
+
+}
+document = {
+    cookie: 'Hm_lvt_337e99a01a907a08d00bed4a1a52e35d=1690457397; sessionid=itefu56ekeiprd33z7qeyeyk3xand1e2; Hm_lpvt_337e99a01a907a08d00bed4a1a52e35d=1690457411'
+}
+screen = {
+    height: 1080,
+    width: 1920,
+    colorDepth: 24,
+}
+class localStorageMock {
+    constructor() {
+      this.store = {};
+    };
+    getItem(key) {
+      return this.store[key] || null;
+    };
+    setItem(key, value) {
+      this.store[key] = value.toString();
+    };
+    removeItem(key) {
+      delete this.store[key];
+    };
+    clear() {
+      this.store = {};
+    };
+  }
+window.localStorage = new localStorageMock()
+window.sessionStorage = new localStorageMock()
+
+XMLHttpRequest = function (){}
+XMLHttpRequest.prototype.send = function (){}
+XMLHttpRequest.prototype.open = function (){}
+XMLHttpRequest.prototype.setRequestHeader = function (){}
+
+try {
+
+
+debugger;
+
+Date.prototype.getTime = function(){
+return 1690435186814
+};
+Math.random = function (){
+    return 0.22283564695768754
+}
+
+;;;;
+
+

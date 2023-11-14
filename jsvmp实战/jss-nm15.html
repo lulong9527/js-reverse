@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/static/boke/js/jquery-3.4.1.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<label for="q" id="qq">?</label>
+<input id="q" type="text">
+<button id="s" onclick="submit()">提交验证</button>
+
+<div style="color: red;display: none" id="ts">答案错误，再想想？</div>
+</body>
+
+<script>
+    function submit(){
+        $.ajax({
+            url: "/challenge/new/check?nm=" + location.href.split("=")[1],
+            type: "POST",
+            data: {
+                as: $("#q").val()
+            },
+            success:function (data){
+                $("body").text("")
+                $("body").append(data)
+            },
+            error:function (){
+                $("#ts").css("display", "block")
+            }
+        })
+    }
+</script>
+
+<script>
+    $.ajax({
+            url: "/challenge/new/check?nm=" + location.href.split("=")[1],
+            type: "POST",
+            data: {z:1},
+            success:function (data){
+                $("#qq").text(data)
+            },
+            error:function (){
+                console.log('失败')
+            }
+        })
+</script>
+</html>
